@@ -1,0 +1,31 @@
+<template>
+  <!--Lightning card containing a picklist of opportunity stages-->
+  <lightning-card title="Opportunity Filter" icon-name="standard:opportunity">
+    <template if:true={showCombobox}>
+      <div class="slds-grid slds-grid_align-space">
+        <div class="slds-col slds-size_4-of-12">
+          <lightning-combobox name="progress" label="Stage" value={value} placeholder="Select Stage"
+            options={opportunityStages} onchange={handleChange}>
+          </lightning-combobox>
+        </div>
+      </div>
+    </template>
+  </lightning-card>
+
+  <!--Displays a datatable of opportunities in the selected stage-->
+  <template if:true={showDataTable}>
+    <lightning-datatable key-field="id" data={data} show-row-number-column hide-checkbox-column columns={columns}>
+    </lightning-datatable>
+  </template>
+
+  <template if:true={dataNotFound}>
+    <lightning-card>
+      <p class="slds-align_absolute-center">No Opportunity found in this stage</p>
+    </lightning-card>
+  </template>
+
+  <!--Conditionally display errors-->
+  <template if:true={error}>
+    <p class="error">Sorry, there was an error, try again</p>
+  </template>
+</template>
